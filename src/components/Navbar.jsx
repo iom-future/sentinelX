@@ -1,27 +1,67 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ANNOUNCEMENT } from '../data/content';
-import { Shield, Terminal, ArrowRight, Menu, X, ChevronRight, Cpu } from './icons';
+import { ArrowRight, Menu, X, ChevronRight } from './icons';
 
-export function Navbar({ onOpenEarlyAccess, onOpenSignIn }) {
+export function Navbar({ onOpenEarlyAccess }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
+  const isNavigatingRef = useRef(false);
+  const navTimeoutRef = useRef(null);
+
+  const navLinks = [
+    { name: 'Platform', href: '#platform', id: 'platform' },
+    { name: 'Solutions', href: '#capabilities', id: 'capabilities' },
+    { name: 'Developers', href: '#developers', id: 'developers' },
+    { name: 'Architecture', href: '#intelligence', id: 'intelligence' },
+    { name: 'Integrations', href: '#integrations', id: 'integrations' },
+    { name: 'Trust', href: '#trust', id: 'trust' },
+  ];
+
+  const handleLinkClick = (href) => {
+    // Immediately place active indicator directly on the target clicked link
+    setActiveSection(href);
+    isNavigatingRef.current = true;
+
+    // Lock scrollspy updates while browser smooth-scrolls to the target
+    if (navTimeoutRef.current) clearTimeout(navTimeoutRef.current);
+    navTimeoutRef.current = setTimeout(() => {
+      isNavigatingRef.current = false;
+    }, 900);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
-  const navLinks = [
-    { name: 'Platform', href: '#platform', tag: '01' },
-    { name: 'Solutions', href: '#capabilities', tag: '02' },
-    { name: 'Developers', href: '#developers', tag: '03' },
-    { name: 'Architecture', href: '#intelligence', tag: '04' },
-    { name: 'Integrations', href: '#integrations', tag: '05' },
-    { name: 'Trust', href: '#trust', tag: '06' },
-  ];
+      // Skip intermediate updates if user intentionally clicked a link
+      if (isNavigatingRef.current) return;
+
+      // Detect which section is currently in view
+      const scrollPosition = window.scrollY + 160;
+      let current = '';
+
+      for (const link of navLinks) {
+        const el = document.getElementById(link.id);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPosition >= top && scrollPosition < top + height) {
+            current = link.href;
+            break;
+          }
+        }
+      }
+      setActiveSection(current);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (navTimeoutRef.current) clearTimeout(navTimeoutRef.current);
+    };
+  }, []);
 
   return (
     <>
@@ -64,7 +104,7 @@ export function Navbar({ onOpenEarlyAccess, onOpenSignIn }) {
           {/* Logo */}
           <a href="#" className="flex items-center gap-3 group">
             {/* Custom Geometric Security Symbol */}
-            <div className="relative w-9 h-9 rounded-lg bg-[#101622] border border-[#243044] flex items-center justify-center group-hover:border-[#3978E8] transition-colors shadow-sm">
+            <div className="w-9 h-9 rounded-lg bg-[#101622] border border-[#243044] flex items-center justify-center group-hover:border-[#3978E8] transition-colors shadow-sm">
               <svg
                 className="w-5 h-5 text-[#3978E8] transition-transform duration-300 group-hover:scale-105"
                 viewBox="0 0 24 24"
@@ -80,46 +120,39 @@ export function Navbar({ onOpenEarlyAccess, onOpenSignIn }) {
                 <line x1="12" y1="5" x2="12" y2="8" stroke="#43D9C3" strokeWidth="1.5" />
                 <line x1="12" y1="16" x2="12" y2="19" stroke="#43D9C3" strokeWidth="1.5" />
               </svg>
-              <div className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-[#43D9C3] ring-2 ring-[#080B12]"></div>
             </div>
 
-            <div className="flex flex-col">
-              <div className="flex items-center gap-1.5">
-                <span className="font-heading font-bold text-lg tracking-wider text-[#F4F7FC]">
-                  SENTINEL<span className="text-[#3978E8]">X</span>
-                </span>
-                <span className="text-[10px] font-mono px-1 py-0.5 rounded bg-[#161F2D] text-[#43D9C3] border border-[#243044]">
-                  v2.4
-                </span>
-              </div>
-              <span className="text-[9px] font-mono text-[#929EAE] tracking-tight -mt-0.5 hidden sm:block">
-                SEC_INTELLIGENCE // L7_eBPF
-              </span>
-            </div>
+            <span className="font-heading font-bold text-lg tracking-wider text-[#F4F7FC]">
+              SENTINEL<span className="text-[#3978E8]">X</span>
+            </span>
           </a>
 
-          {/* Desktop Links */}
+          {/* Desktop Links with Instant Blue Active Indicator Dot */}
           <nav className="hidden md:flex items-center gap-1 lg:gap-2">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="group relative px-3 py-1.5 text-sm text-[#929EAE] hover:text-[#F4F7FC] transition-colors rounded-md hover:bg-[#101622]/60 flex items-center"
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-[#3978E8] mr-2 opacity-50 group-hover:opacity-100 group-hover:scale-125 transition-all"></span>
-                {link.name}
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.href;
+              return (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => handleLinkClick(link.href)}
+                  className={`group relative px-3 py-1.5 text-sm transition-colors rounded-md flex items-center ${
+                    isActive
+                      ? 'text-[#F4F7FC] font-medium bg-[#101622]'
+                      : 'text-[#929EAE] hover:text-[#F4F7FC] hover:bg-[#101622]/60'
+                  }`}
+                >
+                  {isActive && (
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#3978E8] shadow-[0_0_8px_#3978E8] mr-2" />
+                  )}
+                  {link.name}
+                </a>
+              );
+            })}
           </nav>
 
           {/* Action CTAs */}
           <div className="hidden sm:flex items-center gap-3">
-            <button
-              onClick={onOpenSignIn}
-              className="text-xs font-mono font-medium text-[#929EAE] hover:text-[#F4F7FC] px-3 py-2 rounded-md transition-colors hover:bg-[#101622] border border-transparent hover:border-[#243044]"
-            >
-              [Sign In]
-            </button>
             <button
               onClick={onOpenEarlyAccess}
               className="relative inline-flex items-center gap-2 px-4 py-2 text-xs font-mono font-semibold rounded-md bg-[#3978E8] text-white hover:bg-[#3269d0] transition-all shadow-md hover:shadow-[#3978E8]/20 border border-[#3978E8]/80 cursor-pointer group"
@@ -150,38 +183,41 @@ export function Navbar({ onOpenEarlyAccess, onOpenSignIn }) {
               <span className="text-[#43D9C3]">[ONLINE]</span>
             </div>
             <div className="grid grid-cols-1 gap-1">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center justify-between px-3 py-2 rounded-md text-sm text-[#F4F7FC] hover:bg-[#101622] border border-transparent hover:border-[#243044]"
-                >
-                  <span className="flex items-center gap-2.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#3978E8]"></span>
-                    {link.name}
-                  </span>
-                  <ChevronRight className="w-4 h-4 text-[#929EAE]" />
-                </a>
-              ))}
+              {navLinks.map((link) => {
+                const isActive = activeSection === link.href;
+                return (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => {
+                      handleLinkClick(link.href);
+                      setMobileMenuOpen(false);
+                    }}
+                    className={`flex items-center justify-between px-3 py-2 rounded-md text-sm transition-colors border ${
+                      isActive
+                        ? 'text-[#F4F7FC] bg-[#101622] border-[#3978E8]/40'
+                        : 'text-[#929EAE] hover:text-[#F4F7FC] hover:bg-[#101622] border-transparent hover:border-[#243044]'
+                    }`}
+                  >
+                    <span className="flex items-center gap-2.5">
+                      {isActive && (
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#3978E8] shadow-[0_0_8px_#3978E8]"></span>
+                      )}
+                      <span className={isActive ? 'font-medium text-white' : ''}>{link.name}</span>
+                    </span>
+                    <ChevronRight className="w-4 h-4 text-[#929EAE]" />
+                  </a>
+                );
+              })}
             </div>
 
             <div className="pt-3 border-t border-[#243044] flex flex-col gap-2">
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
-                  onOpenSignIn();
-                }}
-                className="w-full text-center py-2 text-xs font-mono text-[#929EAE] bg-[#101622] border border-[#243044] rounded-md"
-              >
-                Sign In to Console
-              </button>
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
                   onOpenEarlyAccess();
                 }}
-                className="w-full text-center py-2 text-xs font-mono font-semibold text-white bg-[#3978E8] rounded-md shadow"
+                className="w-full text-center py-2.5 text-xs font-mono font-semibold text-white bg-[#3978E8] rounded-md shadow"
               >
                 Request Early Access [P0]
               </button>
