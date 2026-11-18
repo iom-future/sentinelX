@@ -15,7 +15,6 @@ import { FAQ } from './components/FAQ';
 import { FinalCTA } from './components/FinalCTA';
 import { Footer } from './components/Footer';
 import { EarlyAccessModal } from './components/EarlyAccessModal';
-import { NotificationToast } from './components/NotificationToast';
 import { ErrorBoundary } from './components/ErrorBoundary';
 
 export default function App() {
@@ -93,14 +92,12 @@ export default function App() {
       {/* 16. Footer */}
       <Footer onOpenEarlyAccess={handleOpenEarlyAccess} />
 
-      {/* Modals & Live Telemetry Toast */}
+      {/* Early Access Modal */}
       <EarlyAccessModal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
         mode={modalMode}
       />
-
-      <NotificationToast />
     </div>
   );
 }
