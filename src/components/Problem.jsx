@@ -10,18 +10,18 @@ import {
 } from './icons';
 
 export function Problem() {
-  const getProblemIcon = (iconName) => {
+  const getLargeProblemIcon = (iconName) => {
     switch (iconName) {
       case 'BellOff':
-        return <BellOff className="w-5 h-5 text-[#F4B860]" />;
+        return <BellOff className="w-full h-full stroke-[1]" />;
       case 'Layers':
-        return <Layers className="w-5 h-5 text-[#3978E8]" />;
+        return <Layers className="w-full h-full stroke-[1]" />;
       case 'Clock':
-        return <Clock className="w-5 h-5 text-[#F06464]" />;
+        return <Clock className="w-full h-full stroke-[1]" />;
       case 'Flame':
-        return <Flame className="w-5 h-5 text-[#F06464]" />;
+        return <Flame className="w-full h-full stroke-[1]" />;
       default:
-        return <AlertCircle className="w-5 h-5 text-[#929EAE]" />;
+        return <AlertCircle className="w-full h-full stroke-[1]" />;
     }
   };
 
@@ -31,65 +31,37 @@ export function Problem() {
       <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        {/* Section Header */}
-        <div className="max-w-3xl space-y-4">
+        {/* Section Header with Shortened Supporting Text */}
+        <div className="max-w-3xl space-y-3">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-heading text-[#F4F7FC] tracking-tight">
             Threats Move Faster Than Traditional Security Workflows.
           </h2>
 
           <p className="text-base sm:text-lg text-[#929EAE] leading-relaxed">
-            Applications, APIs and cloud environments generate constant activity. Security teams must distinguish normal behaviour from suspicious activity while working with information spread across multiple systems.
-            <br />
-            <span className="text-[#F4F7FC] font-medium">
-              When visibility is fragmented, important warning signs can be missed.
-            </span>
+            Fragmented visibility hides critical warning signs. Teams need clear signals before suspicious activity turns into a breach.
           </p>
         </div>
 
-        {/* 4 Problem Cards - Clean, No Fake Numbering or Noisy Tags */}
-        <div className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* 4 Problem Cards - Side by Side on Desktop View (lg:grid-cols-4), Big Background Icon, Zero Tag Clutter */}
+        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
           {PROBLEM_CARDS.map((card) => (
             <div
               key={card.id}
-              className="bg-[#101622] border border-[#243044] rounded-xl p-6 relative overflow-hidden group hover:border-[#3978E8]/50 transition-all duration-300 hover:shadow-xl hover:shadow-black/60 flex flex-col justify-between"
+              className="bg-[#101622] border border-[#243044] hover:border-[#3978E8]/40 rounded-xl p-6 sm:p-7 relative overflow-hidden group transition-colors duration-300 flex flex-col justify-center min-h-[220px]"
             >
-              {/* Top Accent Line */}
-              <div className="absolute top-0 left-0 right-0 h-[2px] bg-[#243044] group-hover:bg-gradient-to-r group-hover:from-[#3978E8] group-hover:to-[#43D9C3] transition-all"></div>
+              {/* Big background icon watermark behind the text */}
+              <div className="absolute -right-3 -bottom-3 w-32 h-32 sm:w-36 sm:h-36 text-white/[0.035] group-hover:text-[#3978E8]/[0.10] transition-all duration-500 pointer-events-none select-none group-hover:scale-105">
+                {getLargeProblemIcon(card.icon)}
+              </div>
 
-              <div>
-                {/* Header row with Icon and Impact Metric */}
-                <div className="flex items-start justify-between gap-3 pb-4 border-b border-[#243044]/80">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-[#161F2D] border border-[#243044] flex items-center justify-center group-hover:border-[#3978E8]/40 transition-colors shadow-sm">
-                      {getProblemIcon(card.icon)}
-                    </div>
-                    <div>
-                      <span className="font-mono text-xs text-[#929EAE] uppercase font-medium">
-                        {card.badge}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Impact Metric Pill */}
-                  <div className="text-right">
-                    <div className="text-xl font-mono font-bold text-[#F4F7FC]">
-                      {card.metricValue}
-                    </div>
-                    <div className="text-[10px] font-mono text-[#929EAE]">
-                      {card.metricLabel}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Card Title & Description */}
-                <div className="mt-4 space-y-2">
-                  <h3 className="text-xl font-heading font-semibold text-[#F4F7FC] group-hover:text-white transition-colors flex items-center gap-2.5">
-                    <span>{card.title}</span>
-                  </h3>
-                  <p className="text-sm text-[#929EAE] leading-relaxed">
-                    {card.description}
-                  </p>
-                </div>
+              {/* Foreground Content */}
+              <div className="relative z-10 space-y-3">
+                <h3 className="text-base sm:text-lg font-heading font-semibold text-[#F4F7FC] group-hover:text-white transition-colors leading-snug">
+                  {card.title}
+                </h3>
+                <p className="text-xs sm:text-sm text-[#929EAE] leading-relaxed">
+                  {card.description}
+                </p>
               </div>
             </div>
           ))}
