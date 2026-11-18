@@ -1,44 +1,65 @@
-import React, { useState } from 'react';
-import { CORE_CAPABILITIES } from '../data/content';
-import { 
-  BrainCircuit, 
-  Globe, 
-  ShieldAlert, 
-  GitFork, 
-  BellRing, 
-  BarChart4, 
-  CheckCircle2, 
-  ArrowRight,
-  Cpu
-} from './icons';
+import React from 'react';
+import threatTopologyImg from '../assets/images/threat-topology.jpg';
+import apiPipelineImg from '../assets/images/solutions-api-pipeline.jpg';
+import vulnInfrastructureImg from '../assets/images/infrastructure-nodes.jpg';
+import incidentGraphImg from '../assets/images/solutions-incident-graph.jpg';
+import alertsAutomationImg from '../assets/images/solutions-alerts-automation.jpg';
+import analyticsImg from '../assets/images/solutions-analytics.jpg';
 
 export function Features() {
-  const [hoveredIndex, setHoveredIndex] = useState(null);
-
-  const getCapabilityIcon = (iconName) => {
-    switch (iconName) {
-      case 'BrainCircuit':
-        return <BrainCircuit className="w-5 h-5 text-[#3978E8]" />;
-      case 'Globe':
-        return <Globe className="w-5 h-5 text-[#43D9C3]" />;
-      case 'ShieldAlert':
-        return <ShieldAlert className="w-5 h-5 text-[#F4B860]" />;
-      case 'GitFork':
-        return <GitFork className="w-5 h-5 text-[#3978E8]" />;
-      case 'BellRing':
-        return <BellRing className="w-5 h-5 text-[#43D9C3]" />;
-      case 'BarChart4':
-        return <BarChart4 className="w-5 h-5 text-[#3978E8]" />;
-      default:
-        return <Cpu className="w-5 h-5 text-[#3978E8]" />;
+  const solutionsCards = [
+    {
+      id: 'ai-threat',
+      title: 'AI-Assisted Threat Detection',
+      description: 'Continuous behavioral baseline learning that catches zero-day access anomalies and subtle lateral movements without brittle signature sets.',
+      image: threatTopologyImg,
+      alt: 'AI-Assisted Threat Detection Topology',
+      bentoSpan: 'md:col-span-2 lg:col-span-2'
+    },
+    {
+      id: 'api-monitor',
+      title: 'Application & API Monitoring',
+      description: 'Deep introspection into HTTP/REST, gRPC, and GraphQL requests with automatic token credential validation and payload scanning.',
+      image: apiPipelineImg,
+      alt: 'Application and API Monitoring Pipeline',
+      bentoSpan: 'md:col-span-1 lg:col-span-1'
+    },
+    {
+      id: 'vuln-intel',
+      title: 'Vulnerability Intelligence',
+      description: 'Context-aware vulnerability scoring that evaluates actual reachability and runtime exploitability rather than theoretical CVE databases.',
+      image: vulnInfrastructureImg,
+      alt: 'Vulnerability Intelligence and Asset Reachability',
+      bentoSpan: 'md:col-span-1 lg:col-span-1'
+    },
+    {
+      id: 'incident-investigate',
+      title: 'Intelligent Incident Investigation',
+      description: 'Automatic event graph correlation reconstructs the blast radius from ingress point to database write within milliseconds.',
+      image: incidentGraphImg,
+      alt: 'Incident Investigation and Blast Radius Graph',
+      bentoSpan: 'md:col-span-2 lg:col-span-2'
+    },
+    {
+      id: 'alerts-automation',
+      title: 'Security Alerts & Automation',
+      description: 'Deterministic webhook pipelines and bidirectional incident syncing directly into Slack, PagerDuty, or security orchestration runbooks.',
+      image: alertsAutomationImg,
+      alt: 'Security Alerts and Automation Engine',
+      bentoSpan: 'md:col-span-2 lg:col-span-2'
+    },
+    {
+      id: 'analytics-dashboard',
+      title: 'Security Analytics Dashboard',
+      description: 'High-density telemetry views for engineers with drill-down capabilities from multi-region clusters down to individual pod system calls.',
+      image: analyticsImg,
+      alt: 'Security Analytics Dashboard and Telemetry Metrics',
+      bentoSpan: 'md:col-span-1 lg:col-span-1'
     }
-  };
+  ];
 
   return (
     <section id="capabilities" className="py-24 bg-[#080B12] relative border-b border-[#243044]/60">
-      {/* Background Grid Accent */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-25 pointer-events-none"></div>
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Section Header - Clean, No Tags */}
         <div className="max-w-3xl space-y-4">
@@ -51,57 +72,31 @@ export function Features() {
           </p>
         </div>
 
-        {/* 6 Capabilities Cards Grid */}
-        <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {CORE_CAPABILITIES.map((cap, index) => (
+        {/* Solutions Bento Grid - Cards designed like the Platform section */}
+        <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          {solutionsCards.map((card) => (
             <div
-              key={cap.id}
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
-              className="bg-[#101622] border border-[#243044] rounded-xl p-6 flex flex-col justify-between group hover:border-[#3978E8]/70 hover:shadow-xl hover:shadow-black/60 transition-all duration-300 relative overflow-hidden"
+              key={card.id}
+              className={`relative min-h-[320px] sm:min-h-[380px] rounded-2xl overflow-hidden border border-[#243044] hover:border-[#3978E8]/40 transition-colors duration-300 group flex flex-col justify-end p-6 sm:p-8 bg-[#080B12] shadow-2xl ${card.bentoSpan}`}
             >
-              {/* Top hairline indicator */}
-              <div className="absolute top-0 left-0 right-0 h-[2px] bg-[#243044] group-hover:bg-[#3978E8] transition-colors"></div>
+              {/* Background Image filling the entire card */}
+              <img
+                src={card.image}
+                alt={card.alt}
+                className="absolute inset-0 w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
+              />
 
-              <div>
-                {/* Header with Icon Badge */}
-                <div className="pb-3 border-b border-[#243044]/80">
-                  <div className="w-10 h-10 rounded-lg bg-[#161F2D] border border-[#243044] flex items-center justify-center group-hover:scale-105 transition-transform shadow-sm">
-                    {getCapabilityIcon(cap.icon)}
-                  </div>
-                </div>
+              {/* Seamless dark gradient overlay at the bottom for optimal readability */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#080B12] via-[#080B12]/80 to-transparent pointer-events-none" />
 
-                {/* Title & Tagline with Icon */}
-                <div className="mt-4 space-y-2">
-                  <h3 className="text-lg font-heading font-semibold text-[#F4F7FC] group-hover:text-white transition-colors">
-                    {cap.title}
-                  </h3>
-
-                  <p className="text-xs font-mono text-[#3978E8] font-medium pt-0.5">
-                    {cap.tagline}
-                  </p>
-
-                  <p className="text-xs text-[#929EAE] leading-relaxed pt-1">
-                    {cap.description}
-                  </p>
-                </div>
-
-                {/* Bullets List */}
-                <div className="mt-5 space-y-2 pt-4 border-t border-[#243044]/50">
-                  <div className="text-[10px] font-mono text-[#929EAE] uppercase">
-                    Core Capabilities:
-                  </div>
-                  <ul className="space-y-1.5 text-xs text-[#F4F7FC]">
-                    {cap.bullets.map((bullet, bIdx) => (
-                      <li key={bIdx} className="flex items-start gap-2">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#3978E8] shrink-0 mt-0.5" />
-                        <span className="text-xs text-[#929EAE] group-hover:text-[#F4F7FC] transition-colors">
-                          {bullet}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              {/* Bottom Text Overlay (Title. Description) */}
+              <div className="relative z-10">
+                <span className="text-base sm:text-lg font-heading font-semibold text-[#F4F7FC]">
+                  {card.title}.{' '}
+                </span>
+                <span className="text-xs sm:text-sm text-[#929EAE] leading-relaxed">
+                  {card.description}
+                </span>
               </div>
             </div>
           ))}
