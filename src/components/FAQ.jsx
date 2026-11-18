@@ -33,16 +33,6 @@ export function FAQ() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl space-y-4">
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-mono font-medium px-2.5 py-1 rounded bg-[#101622] text-[#3978E8] border border-[#3978E8]/30 uppercase tracking-wider inline-flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#3978E8]"></span>
-              FREQUENTLY ASKED QUESTIONS
-            </span>
-            <span className="text-[11px] font-mono text-[#929EAE] px-2 py-0.5 rounded bg-[#101622] border border-[#243044]">
-              [KNOWLEDGE_BASE: CORE_ITEMS]
-            </span>
-          </div>
-
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-heading text-[#F4F7FC] tracking-tight">
             Frequently Asked Questions.
           </h2>

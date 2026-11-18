@@ -9,7 +9,6 @@ import {
   ShieldCheck, 
   AlertOctagon, 
   ArrowRight, 
-  Info, 
   Server, 
   Zap, 
   Eye, 
@@ -19,41 +18,32 @@ import {
 } from './icons';
 
 export function IntelligenceEngine() {
-  const [selectedNode, setSelectedNode] = useState(NETWORK_NODES[1]); // Default to API Gateway
+  const [selectedNode, setSelectedNode] = useState(NETWORK_NODES[1] || NETWORK_NODES[0]); // Default to API Gateway
+  const activeNode = selectedNode || NETWORK_NODES[0] || {};
 
   const getLayerIcon = (iconName) => {
     switch (iconName) {
       case 'Radio':
-        return <Radio className="w-5 h-5 text-[#43D9C3]" />;
+        return <Radio className="w-5 h-5 text-[#3978E8]" />;
       case 'BrainCircuit':
         return <BrainCircuit className="w-5 h-5 text-[#3978E8]" />;
       case 'Share2':
-        return <Share2 className="w-5 h-5 text-[#F4B860]" />;
+        return <Share2 className="w-5 h-5 text-[#43D9C3]" />;
       case 'UserCheck':
-        return <UserCheck className="w-5 h-5 text-[#43D9C3]" />;
+        return <UserCheck className="w-5 h-5 text-[#3978E8]" />;
       default:
-        return <Activity className="w-5 h-5 text-[#43D9C3]" />;
+        return <Activity className="w-5 h-5 text-[#3978E8]" />;
     }
   };
 
   return (
     <section id="intelligence" className="py-24 bg-[#080B12] relative border-b border-[#243044]/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
+        {/* Section Header - Clean, No Tags */}
         <div className="max-w-3xl space-y-4">
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-mono font-medium px-2.5 py-1 rounded bg-[#101622] text-[#43D9C3] border border-[#43D9C3]/30 uppercase tracking-wider inline-flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#43D9C3]"></span>
-              SECURITY INTELLIGENCE
-            </span>
-            <span className="text-[11px] font-mono text-[#929EAE] px-2 py-0.5 rounded bg-[#101622] border border-[#243044]">
-              [DAG_TOPOLOGY: VECTOR_GRAPH]
-            </span>
-          </div>
-
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-heading text-[#F4F7FC] tracking-tight">
             Don't Just Detect Events. <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F4F7FC] to-[#43D9C3]">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F4F7FC] to-[#3978E8]">
               Understand Their Connections.
             </span>
           </h2>
@@ -63,89 +53,55 @@ export function IntelligenceEngine() {
           </p>
         </div>
 
-        {/* 4 Interconnected Layers Cards - Numbers Removed, Icons Added */}
+        {/* 4 Interconnected Layers Cards */}
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {INTELLIGENCE_LAYERS.map((layer) => (
             <div
               key={layer.id}
-              className="bg-[#101622] border border-[#243044] rounded-xl p-5 flex flex-col justify-between group hover:border-[#43D9C3]/50 transition-colors"
+              className="bg-[#101622] border border-[#243044] rounded-xl p-5 flex flex-col justify-between group hover:border-[#3978E8]/50 transition-colors"
             >
               <div>
-                {/* Header with Icon and Short Code - No Numbers */}
-                <div className="flex items-center justify-between pb-3 border-b border-[#243044]/80">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-lg bg-[#161F2D] border border-[#243044] flex items-center justify-center shadow-sm">
-                      {getLayerIcon(layer.icon)}
-                    </div>
-                    <span className="font-mono text-xs text-[#929EAE]">
-                      [{layer.short}]
-                    </span>
+                {/* Header with Icon */}
+                <div className="pb-3 border-b border-[#243044]/80">
+                  <div className="w-9 h-9 rounded-lg bg-[#161F2D] border border-[#243044] flex items-center justify-center shadow-sm">
+                    {getLayerIcon(layer.icon)}
                   </div>
-
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#080B12] text-[#43D9C3] border border-[#243044]">
-                    LAYER
-                  </span>
                 </div>
 
-                {/* Title with Icon - No Numbers */}
-                <div className="mt-3.5 space-y-1.5">
-                  <h3 className="text-base font-heading font-semibold text-[#F4F7FC] flex items-center gap-2">
-                    <span className="p-1 rounded bg-[#161F2D] border border-[#243044]/80 text-[#43D9C3] shrink-0">
-                      {getLayerIcon(layer.icon)}
-                    </span>
-                    <span>{layer.name}</span>
+                {/* Title & Description */}
+                <div className="mt-4 space-y-1.5">
+                  <h3 className="text-base font-heading font-semibold text-[#F4F7FC]">
+                    {layer.name}
                   </h3>
                   <p className="text-xs text-[#929EAE] leading-relaxed">
                     {layer.description}
                   </p>
                 </div>
               </div>
-
-              {/* Excessive Tags - No Numbers */}
-              <div className="mt-4 pt-3 border-t border-[#243044]/60">
-                <div className="flex flex-wrap gap-1">
-                  {layer.tags.map((tag, tIdx) => (
-                    <span
-                      key={tIdx}
-                      className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-[#080B12] text-[#929EAE] border border-[#243044]"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
             </div>
           ))}
         </div>
 
-        {/* Interactive Network Topology Visualizer */}
-        <div className="mt-14 bg-[#101622] border border-[#243044] rounded-xl overflow-hidden shadow-2xl">
-          {/* Visualizer Top Bar */}
-          <div className="bg-[#080B12] border-b border-[#243044] px-4 py-3 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+        {/* Interactive Correlation Mesh & Topology Inspector */}
+        <div className="mt-14 bg-[#101622] border border-[#243044] rounded-2xl overflow-hidden shadow-2xl">
+          {/* Header Bar */}
+          <div className="bg-[#080B12] border-b border-[#243044] px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
             <div className="flex items-center gap-2">
-              <Network className="w-4 h-4 text-[#3978E8]" />
+              <span className="w-2 h-2 rounded-full bg-[#3978E8] animate-pulse"></span>
               <span className="text-[#F4F7FC] font-semibold">
-                INFRASTRUCTURE ENTITY GRAPH // TOPOLOGY MATRIX
-              </span>
-              <span className="text-[10px] text-[#929EAE] hidden md:inline">
-                [CLICK A NODE TO MAP RELATIONSHIPS]
+                CROSS-SYSTEM EVENT CORRELATION MESH
               </span>
             </div>
 
-            <div className="flex items-center gap-2">
-              <span className="px-2 py-0.5 rounded text-[10px] bg-[#43D9C3]/10 text-[#43D9C3] border border-[#43D9C3]/30">
-                ● ACTIVE NODES
-              </span>
-              <span className="text-[10px] text-[#F4B860] px-2 py-0.5 rounded bg-[#F4B860]/10 border border-[#F4B860]/30 hidden sm:inline">
-                * Illustrative Graph Relationships
-              </span>
+            <div className="flex items-center gap-2 text-[#929EAE]">
+              <span>Click a node to inspect relationships</span>
             </div>
           </div>
 
           {/* Interactive Topology Canvas + Inspector Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-12 bg-[#0B0F18]">
             {/* Visual Graph View with Generated Threat-Topology Image Background */}
-            <div className="lg:col-span-8 p-6 sm:p-8 relative min-h-[440px] flex flex-col justify-between overflow-hidden border-b lg:border-b-0 lg:border-r border-[#243044]">
+            <div className="lg:col-span-8 p-6 sm:p-8 relative min-h-[420px] flex flex-col justify-between overflow-hidden border-b lg:border-b-0 lg:border-r border-[#243044]">
               {/* Background threat-topology graphic */}
               <div className="absolute inset-0 opacity-20 pointer-events-none">
                 <img
@@ -164,12 +120,7 @@ export function IntelligenceEngine() {
                 <line x1="50%" y1="70%" x2="80%" y2="75%" strokeWidth="1.5" />
               </svg>
 
-              <div className="relative text-[11px] font-mono text-[#929EAE] flex items-center justify-between">
-                <span>VPC_ROUTER: US-EAST-EKS // SUB-NET: 10.0.0.0/16</span>
-                <span className="text-[#3978E8]">[eBPF KERNEL TRACE: ON]</span>
-              </div>
-
-              {/* Node Chips interactive Layout */}
+              {/* Node Chips Interactive Layout */}
               <div className="relative grid grid-cols-2 sm:grid-cols-3 gap-3 my-auto py-4">
                 {NETWORK_NODES.map((node) => {
                   const isSelected = selectedNode.id === node.id;
@@ -184,7 +135,7 @@ export function IntelligenceEngine() {
                       }`}
                     >
                       <div className="flex items-center justify-between text-[10px] font-mono text-[#929EAE] mb-1">
-                        <span className="text-[#3978E8]">[{node.type}]</span>
+                        <span className="text-[#3978E8]">{node.type}</span>
                         <span className={`font-semibold ${node.riskColor}`}>
                           {node.risk}
                         </span>
@@ -193,17 +144,17 @@ export function IntelligenceEngine() {
                         {node.name}
                       </div>
                       <div className="text-[10px] font-mono text-[#929EAE] mt-1 flex items-center justify-between">
-                        <span>{node.type}</span>
-                        <span className="text-[#43D9C3]">{node.latency}</span>
+                        <span>Latency</span>
+                        <span className="text-[#3978E8] font-semibold">{node.latency}</span>
                       </div>
                     </button>
                   );
                 })}
               </div>
 
-              <div className="relative text-[10px] font-mono text-[#929EAE] flex items-center justify-between pt-2">
-                <span>GRAPH ENGINE: DIRECTED_ACYCLIC_GRAPH</span>
-                <span className="text-[#43D9C3]">STATUS: CONVERGED</span>
+              <div className="relative text-xs font-mono text-[#929EAE] flex items-center justify-between pt-2">
+                <span>GRAPH STATUS: CONVERGED</span>
+                <span className="text-[#3978E8]">ALL SYSTEM RELATIONS MAPPED</span>
               </div>
             </div>
 
@@ -211,78 +162,59 @@ export function IntelligenceEngine() {
             <div className="lg:col-span-4 p-5 sm:p-6 bg-[#101622] flex flex-col justify-between space-y-4">
               <div className="space-y-4">
                 <div className="pb-3 border-b border-[#243044] flex items-center justify-between text-xs font-mono">
-                  <div className="flex items-center gap-1.5 text-[#43D9C3]">
+                  <div className="flex items-center gap-1.5 text-[#3978E8]">
                     <Share2 className="w-3.5 h-3.5" />
                     <span className="font-bold">ENTITY DETAILS</span>
                   </div>
-                  <span className="text-[10px] text-[#929EAE]">ID: {selectedNode.id}</span>
                 </div>
 
                 <div>
-                  <div className="text-xs font-mono text-[#929EAE] uppercase">Selected Resource</div>
+                  <div className="text-xs font-mono text-[#929EAE] uppercase">Selected Node</div>
                   <h4 className="text-lg font-heading font-bold text-[#F4F7FC] mt-0.5">
-                    {selectedNode.name}
+                    {activeNode.name}
                   </h4>
                   <div className="flex items-center gap-2 mt-1">
-                    <span className={`text-xs font-mono font-semibold px-2 py-0.5 rounded ${selectedNode.bg}`}>
-                      {selectedNode.risk}
+                    <span className={`text-xs font-mono font-semibold px-2 py-0.5 rounded ${activeNode.bg || ''}`}>
+                      {activeNode.risk}
                     </span>
                     <span className="text-[11px] font-mono text-[#929EAE]">
-                      Type: {selectedNode.type}
+                      Type: {activeNode.type}
                     </span>
                   </div>
                 </div>
 
                 {/* Behavioral Details */}
-                <div className="p-3 bg-[#080B12] border border-[#243044] rounded text-xs space-y-2">
+                <div className="p-3.5 bg-[#080B12] border border-[#243044] rounded-lg text-xs space-y-2">
                   <div className="text-[10px] font-mono text-[#929EAE] uppercase">
-                    Observed Anomaly / Baseline:
+                    Behavioral Anomaly Context:
                   </div>
                   <p className="text-xs text-[#929EAE] leading-relaxed font-sans">
-                    {selectedNode.details}
+                    {activeNode.details}
                   </p>
                 </div>
 
                 {/* Connected Edges */}
                 <div className="space-y-1.5 text-xs font-mono">
                   <div className="text-[10px] text-[#929EAE] uppercase">
-                    Connected Graph Relatives:
+                    Connected Relations:
                   </div>
-                  <div className="flex flex-wrap gap-1">
-                    {selectedNode.connectedTo.map((cId) => (
+                  <div className="flex flex-wrap gap-1.5">
+                    {((activeNode.connectedTo) || (activeNode.connections) || []).map((conn, cIdx) => (
                       <span
-                        key={cId}
-                        className="text-[10px] px-2 py-0.5 rounded bg-[#161F2D] text-[#3978E8] border border-[#3978E8]/30"
+                        key={cIdx}
+                        className="text-[11px] px-2 py-0.5 rounded bg-[#161F2D] text-[#F4F7FC] border border-[#243044]"
                       >
-                        → {cId}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Excessive Tags for Selected Node */}
-                <div className="space-y-1.5 pt-2 border-t border-[#243044]">
-                  <div className="text-[10px] font-mono text-[#929EAE] uppercase">
-                    Entity Telemetry Tags:
-                  </div>
-                  <div className="flex flex-wrap gap-1">
-                    {selectedNode.tags.map((tag, tIdx) => (
-                      <span
-                        key={tIdx}
-                        className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-[#080B12] text-[#929EAE] border border-[#243044]"
-                      >
-                        {tag}
+                        → {conn}
                       </span>
                     ))}
                   </div>
                 </div>
               </div>
 
-              {/* Bottom Clarification note */}
-              <div className="pt-3 border-t border-[#243044] text-[10px] font-mono text-[#929EAE] flex items-start gap-1.5">
-                <Info className="w-3.5 h-3.5 text-[#3978E8] shrink-0 mt-0.5" />
-                <span>
-                  Notice: Graph connections indicate communication topology and telemetry correlation. Suspicious relationships are segregated from confirmed incidents.
+              <div className="pt-2 border-t border-[#243044]/60">
+                <span className="text-xs font-mono text-[#3978E8] flex items-center gap-1">
+                  <ShieldCheck className="w-3.5 h-3.5" />
+                  <span>Real-time graph analysis active</span>
                 </span>
               </div>
             </div>

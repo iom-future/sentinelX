@@ -3,43 +3,26 @@ import { INTEGRATIONS } from '../data/content';
 import { 
   Cloud, 
   Server, 
-  Cpu, 
-  GitBranch, 
-  GitPullRequest, 
-  Code, 
+  Terminal, 
   Activity, 
-  BarChart3, 
-  Radio, 
-  MessageSquare, 
+  GitBranch, 
   Bell, 
-  Share2, 
-  Zap, 
-  Layers, 
-  Workflow,
-  Search,
-  Filter
+  Database, 
+  ExternalLink 
 } from './icons';
-
-const iconMap = {
-  Cloud,
-  Server,
-  Cpu,
-  GitBranch,
-  GitPullRequest,
-  Code,
-  Activity,
-  BarChart3,
-  Radio,
-  MessageSquare,
-  Bell,
-  Share2,
-  Zap,
-  Layers,
-  Workflow,
-};
 
 export function Integrations() {
   const [selectedCat, setSelectedCat] = useState('all');
+
+  const iconMap = {
+    Cloud: Cloud,
+    Server: Server,
+    Terminal: Terminal,
+    Activity: Activity,
+    GitBranch: GitBranch,
+    Bell: Bell,
+    Database: Database,
+  };
 
   const categories = [
     { id: 'all', label: 'All Connectors' },
@@ -57,18 +40,8 @@ export function Integrations() {
   return (
     <section id="integrations" className="py-24 bg-[#080B12] relative border-b border-[#243044]/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
+        {/* Section Header - Clean, No Tags */}
         <div className="max-w-3xl space-y-4">
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-mono font-medium px-2.5 py-1 rounded bg-[#101622] text-[#3978E8] border border-[#3978E8]/30 uppercase tracking-wider inline-flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#3978E8]"></span>
-              CONNECT YOUR STACK
-            </span>
-            <span className="text-[11px] font-mono text-[#929EAE] px-2 py-0.5 rounded bg-[#101622] border border-[#243044]">
-              [CONNECTORS: 15_VERIFIED]
-            </span>
-          </div>
-
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-heading text-[#F4F7FC] tracking-tight">
             Works With the Tools Your Team Already Uses.
           </h2>
@@ -88,7 +61,7 @@ export function Integrations() {
                 onClick={() => setSelectedCat(cat.id)}
                 className={`px-3.5 py-1.5 rounded-lg transition-colors cursor-pointer ${
                   isSelected
-                    ? 'bg-[#161F2D] text-[#43D9C3] font-semibold border border-[#3978E8]'
+                    ? 'bg-[#161F2D] text-[#3978E8] font-semibold border border-[#3978E8]'
                     : 'bg-[#101622] text-[#929EAE] hover:text-[#F4F7FC] border border-[#243044]'
                 }`}
               >
@@ -106,8 +79,8 @@ export function Integrations() {
                 <h3 className="text-sm font-mono font-semibold text-[#F4F7FC] uppercase tracking-wide">
                   {catGroup.category}
                 </h3>
-                <span className="text-[11px] font-mono text-[#929EAE]">
-                  [{catGroup.items.length} Integrations]
+                <span className="text-xs font-mono text-[#929EAE]">
+                  {catGroup.items.length} Integrations
                 </span>
               </div>
 
@@ -124,11 +97,11 @@ export function Integrations() {
                       <div>
                         {/* Top info row */}
                         <div className="flex items-center justify-between text-xs font-mono pb-2 border-b border-[#243044]/60">
-                          <span className="text-[#3978E8]">{item.tags[0]}</span>
+                          <span className="text-[#3978E8] font-medium">{item.tags[0]}</span>
                           <span
                             className={`text-[10px] px-2 py-0.5 rounded font-medium border ${
                               isAvailable
-                                ? 'bg-[#43D9C3]/10 text-[#43D9C3] border-[#43D9C3]/30'
+                                ? 'bg-[#3978E8]/10 text-[#3978E8] border-[#3978E8]/30'
                                 : 'bg-[#161F2D] text-[#929EAE] border-[#243044]'
                             }`}
                           >
@@ -150,20 +123,6 @@ export function Integrations() {
                               Native Integration Layer
                             </div>
                           </div>
-                        </div>
-                      </div>
-
-                      {/* Excessive Tags */}
-                      <div className="mt-4 pt-3 border-t border-[#243044]/60">
-                        <div className="flex flex-wrap gap-1">
-                          {item.tags.map((tag, tIdx) => (
-                            <span
-                              key={tIdx}
-                              className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-[#080B12] text-[#929EAE] border border-[#243044]"
-                            >
-                              {tag}
-                            </span>
-                          ))}
                         </div>
                       </div>
                     </div>

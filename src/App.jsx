@@ -16,6 +16,7 @@ import { FinalCTA } from './components/FinalCTA';
 import { Footer } from './components/Footer';
 import { EarlyAccessModal } from './components/EarlyAccessModal';
 import { NotificationToast } from './components/NotificationToast';
+import { ErrorBoundary } from './components/ErrorBoundary';
 
 export default function App() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -63,7 +64,9 @@ export default function App() {
         <DeveloperExperience onOpenEarlyAccess={handleOpenEarlyAccess} />
 
         {/* 08. The Intelligence Engine & Interactive Graph Topology */}
-        <IntelligenceEngine />
+        <ErrorBoundary>
+          <IntelligenceEngine />
+        </ErrorBoundary>
 
         {/* 09. Security Operations Workspace Mockup */}
         <DashboardPreview onOpenEarlyAccess={handleOpenEarlyAccess} />

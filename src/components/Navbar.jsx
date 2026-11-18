@@ -158,9 +158,6 @@ export function Navbar({ onOpenEarlyAccess }) {
               className="relative inline-flex items-center gap-2 px-4 py-2 text-xs font-mono font-semibold rounded-md bg-[#3978E8] text-white hover:bg-[#3269d0] transition-all shadow-md hover:shadow-[#3978E8]/20 border border-[#3978E8]/80 cursor-pointer group"
             >
               <span>Get Early Access</span>
-              <span className="text-[10px] bg-white/20 px-1 py-0.5 rounded text-white font-mono">
-                P0
-              </span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
             </button>
           </div>
@@ -219,7 +216,7 @@ export function Navbar({ onOpenEarlyAccess }) {
                 }}
                 className="w-full text-center py-2.5 text-xs font-mono font-semibold text-white bg-[#3978E8] rounded-md shadow"
               >
-                Request Early Access [P0]
+                Request Early Access
               </button>
             </div>
           </div>

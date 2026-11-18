@@ -57,10 +57,6 @@ export function Hero({ onOpenEarlyAccess }) {
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-4 text-sm font-mono font-semibold rounded-lg bg-[#3978E8] text-white hover:bg-[#3269d0] transition-all shadow-xl shadow-[#3978E8]/25 border border-[#3978E8] group cursor-pointer hover:shadow-[#3978E8]/40 hover:-translate-y-0.5"
             >
               <span>Get Early Access</span>
-              <span className="px-1.5 py-0.5 text-[10px] bg-white/20 rounded font-mono flex items-center gap-1">
-                <ShieldAlert className="w-3 h-3 text-white" />
-                PILOT
-              </span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
 
@@ -73,28 +69,11 @@ export function Hero({ onOpenEarlyAccess }) {
             </a>
           </div>
 
-          {/* Supporting line and excessive engineering tags */}
-          <div className="pt-4 flex flex-col items-center gap-3">
+          {/* Supporting line */}
+          <div className="pt-4 flex flex-col items-center">
             <p className="text-xs sm:text-sm font-mono text-[#929EAE]">
               {HERO_DATA.supportingLine}
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-2 text-[10px] font-mono text-[#929EAE]">
-              <span className="px-2.5 py-1 rounded bg-[#101622]/80 backdrop-blur-sm border border-[#243044]">
-                [NO-AGENT-BLOAT]
-              </span>
-              <span className="px-2.5 py-1 rounded bg-[#101622]/80 backdrop-blur-sm border border-[#243044]">
-                [ZERO-TRUST-NATIVE]
-              </span>
-              <span className="px-2.5 py-1 rounded bg-[#101622]/80 backdrop-blur-sm border border-[#243044]">
-                [eBPF-ACCELERATED]
-              </span>
-              <span className="px-2.5 py-1 rounded bg-[#101622]/80 backdrop-blur-sm border border-[#243044]">
-                [REAL-TIME-ANOMALY-INFERENCE]
-              </span>
-              <span className="px-2.5 py-1 rounded bg-[#101622]/80 backdrop-blur-sm border border-[#243044]">
-                [OPEN-API-FIRST]
-              </span>
-            </div>
           </div>
         </div>
       </div>
