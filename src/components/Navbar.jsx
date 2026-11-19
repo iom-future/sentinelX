@@ -15,7 +15,7 @@ export function Navbar({ onOpenEarlyAccess }) {
     { name: 'Developers', href: '#developers', id: 'developers' },
     { name: 'Architecture', href: '#intelligence', id: 'intelligence' },
     { name: 'Integrations', href: '#integrations', id: 'integrations' },
-    { name: 'Trust', href: '#trust', id: 'trust' },
+    { name: 'Team', href: '#team', id: 'team' },
   ];
 
   const handleLinkClick = (href) => {

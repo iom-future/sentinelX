@@ -6,10 +6,10 @@ import { HowItWorks } from './components/HowItWorks';
 import { Features } from './components/Features';
 import { DeveloperExperience } from './components/DeveloperExperience';
 import { IntelligenceEngine } from './components/IntelligenceEngine';
-import { DashboardPreview } from './components/DashboardPreview';
 import { Audience } from './components/Audience';
+import { Testimonials } from './components/Testimonials';
 import { Integrations } from './components/Integrations';
-import { Trust } from './components/Trust';
+import { Team } from './components/Team';
 import { EarlyAccess } from './components/EarlyAccess';
 import { FAQ } from './components/FAQ';
 import { FinalCTA } from './components/FinalCTA';
@@ -67,29 +67,29 @@ export default function App() {
           <IntelligenceEngine />
         </ErrorBoundary>
 
-        {/* 09. Security Operations Workspace Mockup */}
-        <DashboardPreview onOpenEarlyAccess={handleOpenEarlyAccess} />
-
-        {/* 10. Who SentinelX Is For */}
+        {/* 09. Who SentinelX Is For */}
         <Audience onOpenEarlyAccess={handleOpenEarlyAccess} />
+
+        {/* 10. Testimonials */}
+        <Testimonials />
 
         {/* 11. Integrations & Ecosystem */}
         <Integrations />
 
-        {/* 12. Trust & Responsible Security */}
-        <Trust />
+        {/* 12. Team Section - Meet the Minds Behind SentinelX */}
+        <Team />
 
-        {/* 13. Early Access Application Form */}
+        {/* 14. Early Access Application Form */}
         <EarlyAccess />
 
-        {/* 14. Frequently Asked Questions */}
+        {/* 15. Frequently Asked Questions */}
         <FAQ />
 
-        {/* 15. Final CTA */}
+        {/* 16. Final CTA */}
         <FinalCTA onOpenEarlyAccess={handleOpenEarlyAccess} />
       </main>
 
-      {/* 16. Footer */}
+      {/* 17. Footer */}
       <Footer onOpenEarlyAccess={handleOpenEarlyAccess} />
 
       {/* Early Access Modal */}

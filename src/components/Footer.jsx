@@ -37,10 +37,10 @@ export function Footer({ onOpenEarlyAccess }) {
       title: 'Resources',
       tag: 'DOCS',
       links: [
-        { name: 'Security Insights', href: '#trust' },
+        { name: 'Security Insights', href: '#platform' },
         { name: 'Documentation', href: '#developers' },
         { name: 'FAQ', href: '#faq' },
-        { name: 'Privacy Policy', href: '#trust' },
+        { name: 'Team', href: '#team' },
       ],
     },
   ];
