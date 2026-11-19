@@ -17,7 +17,18 @@ function pwaStubPlugin() {
   };
 }
 
+const isGitHubActions = process.env.GITHUB_ACTIONS === 'true';
+const repoName = process.env.GITHUB_REPOSITORY ? process.env.GITHUB_REPOSITORY.split('/')[1] : 'sentinelx';
+
+// Dynamic, environment-aware base path:
+// - On GitHub Pages: /<repo-name>/ (or / if username.github.io)
+// - On Vercel & Local dev: /
+const base = isGitHubActions
+  ? (repoName && !repoName.endsWith('.github.io') ? `/${repoName}/` : '/')
+  : (process.env.VITE_BASE || '/');
+
 // https://vite.dev/config/
 export default defineConfig({
+  base,
   plugins: [react(), pwaStubPlugin()],
 });
