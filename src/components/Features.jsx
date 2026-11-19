@@ -1,10 +1,10 @@
 import React from 'react';
-import threatTopologyImg from '../assets/images/threat-topology.jpg';
-import apiPipelineImg from '../assets/images/solutions-api-pipeline.jpg';
-import vulnInfrastructureImg from '../assets/images/infrastructure-nodes.jpg';
-import incidentGraphImg from '../assets/images/solutions-incident-graph.jpg';
-import alertsAutomationImg from '../assets/images/solutions-alerts-automation.jpg';
-import analyticsImg from '../assets/images/solutions-analytics.jpg';
+import threatTopologyImg from '../assets/images/threat-topology.webp';
+import apiPipelineImg from '../assets/images/solutions-api-pipeline.webp';
+import vulnInfrastructureImg from '../assets/images/infrastructure-nodes.webp';
+import incidentGraphImg from '../assets/images/solutions-incident-graph.webp';
+import alertsAutomationImg from '../assets/images/solutions-alerts-automation.webp';
+import analyticsImg from '../assets/images/solutions-analytics.webp';
 
 export function Features() {
   const solutionsCards = [
@@ -83,6 +83,8 @@ export function Features() {
               <img
                 src={card.image}
                 alt={card.alt}
+                loading="lazy"
+                decoding="async"
                 className="absolute inset-0 w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
               />
 

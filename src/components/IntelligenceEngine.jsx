@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { INTELLIGENCE_LAYERS, NETWORK_NODES } from '../data/content';
-import threatTopologyImg from '../assets/images/threat-topology.jpg';
+import threatTopologyImg from '../assets/images/threat-topology.webp';
 import { 
   Network, 
   Share2, 
@@ -107,6 +107,8 @@ export function IntelligenceEngine() {
                 <img
                   src={threatTopologyImg}
                   alt="SentinelX Threat Topology"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover filter contrast-125"
                 />
               </div>

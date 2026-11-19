@@ -1,7 +1,7 @@
 import React from 'react';
-import dapoImg from '../assets/images/testimonials/dapo-adelegan.jpg';
-import sarahImg from '../assets/images/testimonials/sarah-jenkins.jpg';
-import marcusImg from '../assets/images/testimonials/marcus-vance.jpg';
+import dapoImg from '../assets/images/testimonials/dapo-adelegan.webp';
+import sarahImg from '../assets/images/testimonials/sarah-jenkins.webp';
+import marcusImg from '../assets/images/testimonials/marcus-vance.webp';
 
 export function Testimonials() {
   const testimonials = [
@@ -75,6 +75,10 @@ export function Testimonials() {
                 <img
                   src={t.image}
                   alt={t.name}
+                  loading="lazy"
+                  decoding="async"
+                  width="48"
+                  height="48"
                   className="w-12 h-12 rounded-full object-cover border border-[#243044] group-hover:border-[#3978E8] transition-colors shrink-0"
                 />
                 <div>

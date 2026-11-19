@@ -1,10 +1,10 @@
 import React from 'react';
-import babatundeImg from '../assets/images/team/babatunde-adeyemi.jpg';
-import chiomaImg from '../assets/images/team/chioma-okonkwo.jpg';
-import olumideImg from '../assets/images/team/olumide-bakare.jpg';
-import aminaImg from '../assets/images/team/amina-bello.jpg';
-import chineduImg from '../assets/images/team/chinedu-eze.jpg';
-import kayodeImg from '../assets/images/team/kayode-balogun.jpg';
+import babatundeImg from '../assets/images/team/babatunde-adeyemi.webp';
+import chiomaImg from '../assets/images/team/chioma-okonkwo.webp';
+import olumideImg from '../assets/images/team/olumide-bakare.webp';
+import aminaImg from '../assets/images/team/amina-bello.webp';
+import chineduImg from '../assets/images/team/chinedu-eze.webp';
+import kayodeImg from '../assets/images/team/kayode-balogun.webp';
 
 export function Team() {
   const teamMembers = [
@@ -84,6 +84,10 @@ export function Team() {
                 <img
                   src={member.image}
                   alt={member.name}
+                  loading="lazy"
+                  decoding="async"
+                  width="400"
+                  height="300"
                   className="w-full h-full object-cover object-top transform transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#101622] via-transparent to-transparent opacity-80" />

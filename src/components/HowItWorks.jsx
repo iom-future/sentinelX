@@ -1,8 +1,8 @@
 import React from 'react';
-import connectImg from '../assets/images/architecture-isometric.jpg';
-import observeImg from '../assets/images/workflow-observe.jpg';
-import detectImg from '../assets/images/workflow-detect.jpg';
-import investigateImg from '../assets/images/workflow-investigate.jpg';
+import connectImg from '../assets/images/architecture-isometric.webp';
+import observeImg from '../assets/images/workflow-observe.webp';
+import detectImg from '../assets/images/workflow-detect.webp';
+import investigateImg from '../assets/images/workflow-investigate.webp';
 
 export function HowItWorks() {
   const workflowCards = [
@@ -57,6 +57,8 @@ export function HowItWorks() {
               <img
                 src={wf.image}
                 alt={wf.alt}
+                loading="lazy"
+                decoding="async"
                 className="absolute inset-0 w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
               />
 
